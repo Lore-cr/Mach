@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Completa</title>
+    <style>
+        body {
+            background-image: url('https://www.gifcen.com/wp-content/uploads/2021/02/wandavision-gif-17.gif'); 
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculadora {
+            background-color: rgba(169, 59, 59, 0.132); 
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+           
+            
+        }
+
+        #pantalla {
+            width: 100%;
+            height: 60px;
+            background-color: #98a02e9c;
+            border: 2px solid #000;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: right;
+            padding: 10px;
+            font-size: 24px;
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+            overflow-x: hidden;
+            white-space: nowrap;
+            max-width: 320px;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            grid-gap: 10px;
+        }
+
+        .boton {
+            width: 80px;
+            height: 80px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative; 
+            background-color: transparent;
+            padding: 0;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); 
+        }
+
+        .boton img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .boton:before {
+            content: attr(data-numero); 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+        }
+
+        .boton:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.6);
+        }
+
+        .boton:active {
+            transform: scale(0.9);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="calculadora">
+        <div id="pantalla">0</div>
+        <div class="botones">
+            <button class="boton" id="boton7" data-numero="7" onclick="agregarValor('7')">
+                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSfdZoJfsmH1BhGm8ZlK4xKfTHmmfH-t_nMrbqlj7zOAg-M0kxB" alt="Botón 7">
+            </button>
+            <button class="boton" id="boton8" data-numero="8" onclick="agregarValor('8')">
+                <img src="https://i.pinimg.com/564x/40/56/55/405655882725d77b3aa924453b6632bf.jpg" alt="Botón 8">
+            </button>
+            <button class="boton" id="boton9" data-numero="9" onclick="agregarValor('9')">
+                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQpWOVHiRuzmdw55j5LWyfwSMNYtkSKW9SSF9OXLO3pKv-RYq5O" alt="Botón 9">
+            </button>
+            <button class="boton" id="botonDivision" data-numero="/" onclick="operar('/')">
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQyCAu4hsK0DWI2TUEznWZ0AVthNm__tR9vBEjvFlAqhuEIdSEx" alt="División">
+            </button>
+
+            <button class="boton" id="boton4" data-numero="4" onclick="agregarValor('4')">
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTmOdPnGbpA92-ssARsud0TryEgtKrp-AWtjJOXzLiFfHDbpvyV" alt="Botón 4">
+            </button>
+            <button class="boton" id="boton5" data-numero="5" onclick="agregarValor('5')">
+                <img src="https://i.pinimg.com/564x/cb/02/a9/cb02a9b3ef4c15db9f36bf1a67738c91.jpg" alt="Botón 5">
+            </button>
+            <button class="boton" id="boton6" data-numero="6" onclick="agregarValor('6')">
+                <img src="https://i.pinimg.com/236x/bf/84/26/bf8426068b5efed46449db360862cb91.jpg" alt="Botón 6">
+            </button>
+            <button class="boton" id="botonMultiplicacion" data-numero="*" onclick="operar('*')">
+                <img src="https://i.pinimg.com/236x/9f/db/d3/9fdbd38ce91006a0dcb188e4d48a1296.jpg" alt="Multiplicación">
+            </button>
+
+            <button class="boton" id="boton1" data-numero="1" onclick="agregarValor('1')">
+                <img src="https://i.pinimg.com/236x/fc/05/51/fc0551a3bdbcb96e29a1490c54e0c97b.jpg" alt="Botón 1">
+            </button>
+            <button class="boton" id="boton2" data-numero="2" onclick="agregarValor('2')">
+                <img src="https://i.pinimg.com/236x/ab/5b/e6/ab5be67d13de26937470dee91602ee58.jpg" alt="Botón 2">
+            </button>
+            <button class="boton" id="boton3" data-numero="3" onclick="agregarValor('3')">
+                <img src="https://i.pinimg.com/236x/08/23/01/082301550d2fa438745de18d9e47d68d.jpg" alt="Botón 3">
+            </button>
+            <button class="boton" id="botonResta" data-numero="-" onclick="operar('-')">
+                <img src="https://i.pinimg.com/236x/f7/6d/26/f76d2678f979a559146d10a0a06eb15b.jpg" alt="Resta">
+            </button>
+
+            <button class="boton" id="boton0" data-numero="0" onclick="agregarValor('0')">
+                <img src=" https://i.pinimg.com/236x/59/74/8f/59748f5fc291cfe8a923a9846612f112.jpg"  alt="Botón 0">
+            <button class="boton" id="botonBorrarUltimo" data-numero="←" onclick="borrarUltimo()">
+                <img src="https://i.pinimg.com/236x/d0/88/78/d08878a016841c0a432dd7d5eda1c556.jpg" alt="Borrar Último">
+            </button>
+            <button class="boton" id="botonParImpar" data-numero="P/I" onclick="verificarParImpar()">
+                <img src="https://i.pinimg.com/236x/e6/d9/a8/e6d9a8fed1ccc70de41c4fbdc13d813a.jpg" alt="Par o Impar">
+            </button>
+            <button class="boton" id="botonSuma" data-numero="+" onclick="operar('+')">
+                <img src="https://i.pinimg.com/236x/29/32/50/2932506f5eaa5802c1db376a6c3cb7ec.jpg" alt="Suma">
+            </button>
+
+            <button class="boton" id="botonIgual" data-numero="=" onclick="calcular()">
+                <img src="https://i.pinimg.com/236x/f8/9c/f5/f89cf5b724e3c465cab56560dbccd498.jpg" alt="Igual">
+            </button>
+            <button class="boton" id="botonRaiz" data-numero="√" onclick="raizCuadrada()">
+                <img src="https://i.pinimg.com/236x/8d/89/bb/8d89bbfc4e8b1b9bdf8d05725d24cb07.jpg" alt="Raíz Cuadrada">
+            </button>
+            <button class="boton" id="botonPotencia" data-numero="x²" onclick="potenciaCuadrada()">
+                <img src="https://i.pinimg.com/236x/50/4d/00/504d00360013de5f0fe0f4a282076944.jpg" alt="Potencia Cuadrada">
+            </button>
+            <button class="boton" id="botonPrimo" data-numero="P" onclick="verificarPrimo()">
+                <img src="https://i.pinimg.com/236x/1f/77/64/1f77640e1ba26f6f8df627661f7fea33.jpg" alt="Primo">
+            </button>
+
+            <button class="boton" id="botonBorrarTodo" data-numero="CE" onclick="borrarTodo()">
+                <img src="https://i.pinimg.com/564x/22/da/49/22da49576953beda3356496574e14c49.jpg" alt="Borrar Todo">
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let pantalla = document.getElementById('pantalla');
+        let valorActual = '';
+
+        function agregarValor(valor) {
+            valorActual += valor;
+            pantalla.innerText = valorActual;
+        }
+
+        function operar(op) {
+            if (valorActual === '') return;
+            valorActual += ' ' + op + ' ';
+            pantalla.innerText = valorActual;
+        }
+
+        function calcular() {
+            try {
+                let resultado = eval(valorActual);
+                pantalla.innerText = resultado;
+                valorActual = resultado.toString();
+            } catch (error) {
+                pantalla.innerText = 'Error';
+                valorActual = '';
+            }
+        }
+
+        function borrarUltimo() {
+            valorActual = valorActual.slice(0, -1);
+            if (valorActual === '') {
+                pantalla.innerText = '0';
+            } else {
+                pantalla.innerText = valorActual;
+            }
+        }
+
+        function borrarTodo() {
+            valorActual = '';
+            pantalla.innerText = '0';
+        }
+
+        function raizCuadrada() {
+            let numero = parseFloat(valorActual);
+            if (!isNaN(numero)) {
+                pantalla.innerText = Math.sqrt(numero);
+                valorActual = Math.sqrt(numero).toString();
+            }
+        }
+
+        function potenciaCuadrada() {
+            let numero = parseFloat(valorActual);
+            if (!isNaN(numero)) {
+                pantalla.innerText = Math.pow(numero, 2);
+                valorActual = Math.pow(numero, 2).toString();
+            }
+        }
+
+        function verificarParImpar() {
+            let numero = parseInt(valorActual);
+            if (valorActual === '') {
+                pantalla.innerText = 'No hay número para verificar';
+            } else {
+                pantalla.innerText = numero % 2 === 0 ? `${numero} es par` : `${numero} es impar`;
+            }
+        }
+
+        function verificarPrimo() {
+            let numero = parseInt(valorActual);
+            if (valorActual === '') {
+                pantalla.innerText = 'No hay número para verificar';
+            } else {
+                let esPrimo = true;
+                if (numero <= 1) {
+                    esPrimo = false;
+                } else {
+                    for (let i = 2; i <= Math.sqrt(numero); i++) {
+                        if (numero % i === 0) {
+                            esPrimo = false;
+                            break;
+                        }
+                    }
+                }
+                pantalla.innerText = esPrimo ? `${numero} es primo` : `${numero} no es primo`;
+            }
+        }
+    </script>
+</body>
+</html>
